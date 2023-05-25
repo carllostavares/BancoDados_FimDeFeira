@@ -13,9 +13,11 @@ CREATE SCHEMA IF NOT EXISTS fim_de_feira DEFAULT CHARACTER SET utf8 ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS tb_cliente (
   id_cpf_cliente  VARCHAR(14) NOT NULL,
-  nome VARCHAR(200) NOT NULL,
-  email VARCHAR(200) NOT NULL,
+  nome VARCHAR(100) NOT NULL,
+  sobrenome VARCHAR(100) NOT NULL,
+  email VARCHAR(00) NOT NULL,
   sexo ENUM('M', 'F', 'Nao informar') NOT NULL,
+  data_nasc date NOT NULL, 
   PRIMARY KEY (id_cpf_cliente))
 ENGINE = InnoDB;
 
