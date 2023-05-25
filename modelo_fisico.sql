@@ -1,7 +1,7 @@
 
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET  FOREIGN_KEY_CHECKS = 0;
+SET  FOREIGN_KEY_CHECKS = 1;
 
 -- -----------------------------------------------------
 -- Schema mydb
@@ -39,19 +39,19 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS tb_telefone (
   id_numero INT NOT NULL,
   numero VARCHAR(11) NOT NULL,
-  id_cpf_cliente VARCHAR(11) NULL,
+  id_cpf_cliente VARCHAR(14) NULL,
   id_cnpj VARCHAR(20) NULL,
   PRIMARY KEY (id_numero),
   CONSTRAINT fk_tb_telefone
   
     FOREIGN KEY (id_cpf_cliente)
     REFERENCES tb_cliente (id_cpf_cliente)
-    ON DELETE NO ACTION
+	ON DELETE CASCADE
     ON UPDATE NO ACTION,
     
     FOREIGN KEY (id_cnpj)
     REFERENCES tb_parceiro (id_cnpj)
-    ON DELETE NO ACTION
+	ON DELETE CASCADE
     ON UPDATE NO ACTION)
     ENGINE = InnoDB;
 
@@ -71,13 +71,13 @@ CREATE TABLE IF NOT EXISTS tb_endereco (
   
     FOREIGN KEY (id_cpf_cliente)
     REFERENCES tb_cliente (id_cpf_cliente)
-    ON DELETE NO ACTION
+	ON DELETE CASCADE
     ON UPDATE NO ACTION,
     
   CONSTRAINT fk_tb_parceiro
     FOREIGN KEY (id_cnpj)
     REFERENCES tb_parceiro (id_cnpj)
-    ON DELETE NO ACTION
+	ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
