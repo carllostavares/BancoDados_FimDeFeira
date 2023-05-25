@@ -93,7 +93,6 @@ CREATE TABLE IF NOT EXISTS tb_pagamento (
   PRIMARY KEY (id_pagamento))
 ENGINE = InnoDB;
 
-
 -- -----------------------------------------------------
 -- Table tb_pedido
 -- -----------------------------------------------------
