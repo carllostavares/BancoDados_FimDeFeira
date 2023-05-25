@@ -1,7 +1,7 @@
 
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET  FOREIGN_KEY_CHECKS = 1;
+SET  FOREIGN_KEY_CHECKS = 0;
 
 -- -----------------------------------------------------
 -- Schema mydb
@@ -21,8 +21,6 @@ CREATE TABLE IF NOT EXISTS tb_cliente (
   senha VARCHAR (45),
   PRIMARY KEY (id_cpf_cliente))
 ENGINE = InnoDB;
-
-insert into tb_cliente values ("11122233332","carlos","carlos@.com.br","M");
 -- -----------------------------------------------------
 -- Table tb_parceiro
 -- -----------------------------------------------------
@@ -80,7 +78,6 @@ CREATE TABLE IF NOT EXISTS tb_endereco (
 	ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
-
 
 -- -----------------------------------------------------
 -- Table tb_pagamento
