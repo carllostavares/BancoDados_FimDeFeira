@@ -18,6 +18,7 @@ CREATE TABLE IF NOT EXISTS tb_cliente (
   email VARCHAR(100) NOT NULL,
   sexo ENUM('M', 'F', 'Nao informar') NOT NULL,
   data_nasc date NOT NULL, 
+  senha VARCHAR (45),
   PRIMARY KEY (id_cpf_cliente))
 ENGINE = InnoDB;
 
