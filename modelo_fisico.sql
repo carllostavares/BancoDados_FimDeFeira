@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS tb_cliente (
   id_cpf_cliente  VARCHAR(14) NOT NULL,
   nome VARCHAR(100) NOT NULL,
   sobrenome VARCHAR(100) NOT NULL,
-  email VARCHAR(00) NOT NULL,
+  email VARCHAR(100) NOT NULL,
   sexo ENUM('M', 'F', 'Nao informar') NOT NULL,
   data_nasc date NOT NULL, 
   PRIMARY KEY (id_cpf_cliente))
@@ -28,7 +28,7 @@ insert into tb_cliente values ("11122233332","carlos","carlos@.com.br","M");
 CREATE TABLE IF NOT EXISTS tb_parceiro (
   id_cnpj VARCHAR(20) NOT NULL,
   nome VARCHAR(60) NOT NULL,
-  email VARCHAR(45) NOT NULL,
+  email VARCHAR(200) NOT NULL,
   PRIMARY KEY (id_cnpj))
 ENGINE = InnoDB;
 
@@ -38,7 +38,6 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS tb_telefone (
   id_numero INT NOT NULL,
   numero VARCHAR(11) NOT NULL,
-  alternativo VARCHAR(11) NULL,
   id_cpf_cliente VARCHAR(11) NULL,
   id_cnpj VARCHAR(20) NULL,
   PRIMARY KEY (id_numero),
