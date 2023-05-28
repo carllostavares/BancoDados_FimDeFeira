@@ -125,6 +125,7 @@ CREATE TABLE IF NOT EXISTS tb_produto(
   qtd_max_venda INT NULL,
   qtd_total INT NOT NULL,
   id_cnpj VARCHAR(20) NOT NULL,
+  data_validade DATE NOT NULL,
   PRIMARY KEY (id_produto, id_cnpj),
   CONSTRAINT fk_tb_produto
   
@@ -133,7 +134,6 @@ CREATE TABLE IF NOT EXISTS tb_produto(
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
-
 
 -- -----------------------------------------------------
 -- Table tb_itens_pedido
