@@ -100,6 +100,7 @@ CREATE TABLE IF NOT EXISTS tb_pedido (
   data_hr_disp_retirada DATETIME NOT NULL,
   id_pagamento INT NOT NULL,
   id_cpf_cliente VARCHAR(14) NOT NULL,
+  valor_total_pedido DECIMAL(12,2),
   PRIMARY KEY (id_pedido),
   CONSTRAINT fk_tb_pedido
   
