@@ -1,7 +1,7 @@
 
 
-INSERT INTO tb_itens_pedido values (1,1,10,20.00);
-INSERT INTO tb_itens_pedido values (2,2,10,20.00);
+INSERT INTO tb_itens_pedido values (1,1,100,20.00);
+INSERT INTO tb_itens_pedido values (2,2,200,20.00);
 
 SELECT * FROM tb_pedido;
 select * from tb_cliente;
@@ -11,7 +11,7 @@ select * from tb_telefone;
 SELECT * from  tb_itens_pedido;
 
     
-DELETE from  tb_itens_pedido;
+DELETE from  tb_itens_pedido where id_pedido = 1;
 delete  from tb_telefone;
 delete  from tb_produto;
 delete  from tb_cliente;
@@ -41,3 +41,20 @@ SELECT
     qtd_total As "Quantidade Restante",
     (qtd_total * valor_produto)* 0.5 AS "Varlor Total"
 FROM tb_produto;
+
+
+DROP TRIGGER IF EXISTS `fim_de_feira`.`trg_retonando_qtd_produto`;
+
+DELIMITER $$
+CREATE DEFINER = CURRENT_USER TRIGGER `trg_retonando_qtd_produto` BEFORE DELETE ON `tb_itens_pedido` FOR EACH ROW
+BEGIN
+
+DECLARE valor_inserido INT;
+  
+  SET valor_inserido = OLD.qtd_itens;
+  
+  UPDATE tb_produto
+  SET qtd_total = qtd_total + valor_inserido;
+END$$
+DELIMITER ;
+

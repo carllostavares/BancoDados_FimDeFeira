@@ -46,8 +46,29 @@ DROP TABLE IF EXISTS tb_parceiro;
 -- DROP FUNCTION IF EXISTS function_name;
 
 
+-- CREATE TRIGGER
 
+DELIMITER $$
+CREATE DEFINER = CURRENT_USER TRIGGER `trg_retonando_qtd_produto` BEFORE DELETE ON `tb_itens_pedido` FOR EACH ROW
+BEGIN
 
+DECLARE valor_inserido INT;
+  
+  SET valor_inserido = OLD.qtd_itens;
+  
+  UPDATE tb_produto
+  SET qtd_total = qtd_total + valor_inserido;
+END$$
+DELIMITER ;
 
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` TRIGGER `trg_retonando_qtd_produto` BEFORE DELETE ON `tb_itens_pedido` FOR EACH ROW BEGIN
 
-
+DECLARE valor_inserido INT;
+  
+  SET valor_inserido = OLD.qtd_itens;
+  
+  UPDATE tb_produto
+  SET qtd_total = qtd_total + valor_inserido;
+END$$
+DELIMITER ;
