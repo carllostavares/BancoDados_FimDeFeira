@@ -11,6 +11,8 @@ select * from tb_produto;
 select * from tb_telefone;
 select * from tb_pagamento;
 SELECT * from  tb_itens_pedido;
+select * from tb_endereco;
+
 
     
 DELETE from  tb_itens_pedido where id_pedido = 1;

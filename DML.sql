@@ -34,9 +34,35 @@ INSERT INTO tb_parceiro (cnpj_parceiro, nome_parceiro, email_parceiro) VALUES
 -- Table tb_telefone
 -- -----------------------------------------------------
 
+    
 -- -----------------------------------------------------
 -- Table tb_endereco
 -- -----------------------------------------------------
+INSERT INTO tb_endereco (logradouro, numero,bairro,uf, cep, cidade,id_cpf_cliente,id_cnpj) VALUES
+    ('Rua A', 123,"Centro",'SP', '01234-567', 'São Paulo',"11122233332",null),
+    ('Avenida B', 456,"Jardim das Flores", 'RJ', '98765-432', 'Rio de Janeiro',"22233344455",null),
+    ('Rua C', 789, "Vila Esperança",'MG', '65432-109', 'Belo Horizonte',"33344455566",null),
+    ('Avenida D', 321, "Cidade Nova",'RS', '54321-098', 'Porto Alegre',"44455566677",null),
+    ('Rua E', 654, "Parque dos Sonhos",'SC', '87654-321', 'Florianópolis',"55566677788",null),
+    ('Avenida F', 987,"Alto da Colina", 'BA', '21098-765', 'Salvador',"66677788899",null),
+    ('Rua G', 654, "Bosque das Árvores",'CE', '54321-876', 'Fortaleza',"77788899900",null),
+    ('Avenida H', 321, "Lagoa Azul",'PR', '89076-543', 'Curitiba',"88899900011",null),
+    ('Rua I', 852, "Vila Harmonia",'PE', '12345-678', 'Recife',"99900011122",null),
+    ('Avenida J', 963, "Nova Esperança",'GO', '87654-321', 'Goiânia',"00011122233",null);
+    
+    
+    INSERT INTO tb_endereco (logradouro, numero,bairro, uf, cep, cidade,id_cnpj) VALUES
+    ('Rua dos Exemplos', 123,"Jardim Primavera", 'SP', '01234-567', 'São Paulo',"97.776.3530001"),
+    ('Avenida das Amostras', 456,"Residencial Sol Nascente", 'RJ', '98765-432', 'Rio de Janeiro',"11.223.3340001"),
+    ('Travessa dos Testes', 789, "Praia Bela",'MG', '65432-109', 'Belo Horizonte',"22.334.4450001"),
+    ('Avenida dos Resultados', 321, "Campo Verde",'RS', '54321-098', 'Porto Alegre',"33.445.5560001"),
+    ('Rua das Variáveis', 654,"Água Limpa", 'SC', '87654-321', 'Florianópolis',"44.556.6670001"),
+    ('Avenida das Funções', 987,"Vila Rica", 'BA', '21098-765', 'Salvador',"55.667.7780001"),
+    ('Rua das Classes', 654,"Jardim dos Lagos", 'CE', '54321-876', 'Fortaleza',"66.778.8890001"),
+    ('Avenida dos Objetos', 321,"Santa Rosa", 'PR', '89076-543', 'Curitiba',"77.889.9000001"),
+    ('Rua dos Métodos', 852, "Vale Encantado",'PE', '12345-678', 'Recife',"88.990.0110001"),
+    ('Avenida das Estruturas', 963,"Alto da Conquista", 'GO', '87654-321', 'Goiânia',"99.001.1220001");
+
 
 -- -----------------------------------------------------
 -- Table tb_pagamento
@@ -45,8 +71,20 @@ INSERT INTO tb_parceiro (cnpj_parceiro, nome_parceiro, email_parceiro) VALUES
 -- -----------------------------------------------------
 -- Table tb_pedido
 -- -----------------------------------------------------
-INSERT INTO tb_pedido VALUES (1,'2023-07-09','2023-07-10','2023-07-09',1,"000.456.789-56",0);
-INSERT INTO tb_pedido VALUES (2,'2023-07-10','2023-07-10','2023-07-11',2,"123.456.789-56",0);
+
+INSERT INTO tb_pedido (id_pedido, data_hr_pedido, data_hr_retirada, data_hr_disp_retirada, id_pagamento, id_cpf_cliente, valor_total_pedido)
+VALUES
+    (1, '2023-07-09 09:25:00', '2023-07-10 11:40:00', '2023-07-09 10:08:00', 1,"99900011122", 0),
+    (2, '2023-07-10 11:25:00', '2023-07-10 13:40:00', '2023-07-11 12:00:00', 2,"11122233332", 0),
+    (3, '2023-07-11 09:00:00', '2023-07-11 13:00:00', '2023-07-11 10:30:00', 3,"11122233332", 0),
+    (4, '2023-07-12 08:30:00', '2023-07-12 10:45:00', '2023-07-12 09:15:00', 4,"22233344455", 0),
+    (5, '2023-07-13 12:10:00', '2023-07-13 14:30:00', '2023-07-13 13:00:00', 5,"33344455566", 0),
+    (6, '2023-07-14 10:15:00', '2023-07-14 12:30:00', '2023-07-14 11:00:00', 6,"44455566677", 0),
+    (7, '2023-07-15 14:20:00', '2023-07-15 16:45:00', '2023-07-15 15:30:00', 7,"55566677788", 0),
+    (8, '2023-07-16 11:50:00', '2023-07-16 13:15:00', '2023-07-16 12:30:00', 8,"66677788899", 0),
+    (9, '2023-07-17 09:40:00', '2023-07-17 11:55:00', '2023-07-17 10:25:00', 9,"77788899900", 0),
+    (10,'2023-07-18 13:20:00', '2023-07-18 15:45:00', '2023-07-18 14:00:00', 10,"88899900011",0);
+
 
 -- -----------------------------------------------------
 -- Table tb_produto
@@ -94,15 +132,44 @@ VALUES (8, 6.5, "refrigerante fanta uva 2L", 20, 40, "66.778.8890001", '2023-06-
 (49, 4.99, "Café Solúvel 200g", 30, 120, "66.778.8890001", '2023-09-25'),(50, 3.20, "Leite Condensado 395g", 20, 180, "66.778.8890001", '2023-09-30');
 
 INSERT INTO tb_produto (id_produto, valor_produto, descricao_produto, qtd_max_venda, qtd_total, id_cnpj, data_validade)
-VALUES (50, 4.99, "Sabonete Dove 90g ", 25, 30, "77.889.9000001", '2023-06-30'),(71, 1.99, "Biscoito Cream Cracker 200g", 20, 150, "11.223.3340001", '2023-09-10'),
-(72, 2.50, "Refrigerante de Limão 500ml", 15, 100, "22.334.4450001", '2023-09-15'),(73, 0.99, "Sabonete em Barra 75g", 30, 200, "33.445.5560001", '2023-09-20'),
-(74, 4.99, "Café em Cápsulas 10 unidades", 30, 120, "44.556.6670001", '2023-09-25'),(75, 2.20, "Leite em Pó Desnatado 400g", 25, 180, "55.667.7780001", '2023-09-30');
+VALUES (9, 4.99, "Sabonete Dove 90g ", 25, 30, "77.889.9000001", '2023-06-30'),(51, 1.99, "Biscoito Cream Cracker 200g", 20, 150, "11.223.3340001", '2023-09-10'),
+(52, 2.50, "Refrigerante de Limão 500ml", 15, 100, "22.334.4450001", '2023-09-15'),(53, 0.99, "Sabonete em Barra 75g", 30, 200, "33.445.5560001", '2023-09-20'),
+(54, 4.99, "Café em Cápsulas 10 unidades", 30, 120, "44.556.6670001", '2023-09-25'),(55, 2.20, "Leite em Pó Desnatado 400g", 25, 180, "55.667.7780001", '2023-09-30');
 
 INSERT INTO tb_produto (id_produto, valor_produto, descricao_produto, qtd_max_venda, qtd_total, id_cnpj, data_validade)
-VALUES (10, 7.0, "shampoo", 15, 150, "88.990.0110001", '2023-06-28');
+VALUES (10, 7.0, "Shampoo Dex 300ml", 15, 150, "88.990.0110001", '2023-06-28'),(56, 7.0, "Shampoo Dex 300ml", 15, 150, "88.990.0110001", '2023-06-28'),
+    (57, 12.5, "Condicionador Suave 200ml", 10, 80, "88.990.0110001", '2023-07-15'),(58, 2.99, "Sabonete em Barra 90g", 20, 200, "88.990.011000", '2023-08-10'),
+    (59, 3.75, "Creme Dental Fresh 50g", 30, 250, "88.990.0110001", '2023-09-05'),(60, 5.25, "Desodorante Roll-on 50ml", 25, 180, "88.990.0110001", '2023-10-20');
 
 -- -----------------------------------------------------
 -- Table tb_itens_pedido
 -- -----------------------------------------------------
-INSERT INTO tb_itens_pedido values (1,1,100,20.00);
-INSERT INTO tb_itens_pedido values (2,3,100,20.00);
+INSERT INTO tb_itens_pedido (id_produto,id_pedido,qtd_itens) values (1,1,8), (2,3,10);
+
+
+INSERT INTO tb_itens_pedido (id_produto, id_pedido, qtd_itens)
+VALUES
+    (1, 1, 8),
+    (1, 2, 10),
+    (1, 3, 5),
+    (1, 4, 12),
+    (1, 5, 6),
+    
+    (2, 6, 15),
+    (2, 7, 9),
+    (2, 8, 11),
+    (2, 9, 7),
+    (2, 10, 14),
+    
+    (3, 11, 8),
+    (3, 12, 10),
+    (3, 13, 5),
+    (3, 14, 12),
+    (3, 15, 6),
+    
+    (4, 16, 15),
+    (4, 17, 9),
+    (4, 18, 11),
+    (4, 19, 7),
+    (4, 20, 14);
+
