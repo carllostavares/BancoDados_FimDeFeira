@@ -14,13 +14,14 @@ SELECT * from  tb_itens_pedido order by id_pedido ;
 select * from tb_endereco;
 
     
-DELETE from  tb_itens_pedido where id_pedido = 1;
+DELETE from  tb_itens_pedido where id_produto = 1;
 DELETE from  tb_itens_pedido;
 delete from tb_pagamento;
 delete  from tb_telefone;
 delete  from tb_produto;
 delete  from tb_cliente;
 delete  from tb_pedido;
+delete from tb_parceiro;
 delete  from tb_cliente where nome = "Joao Carlos" ;
  -- now()
 

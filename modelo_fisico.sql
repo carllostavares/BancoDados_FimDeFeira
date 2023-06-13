@@ -1,7 +1,7 @@
 
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=1;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET  FOREIGN_KEY_CHECKS = 0;
+SET  FOREIGN_KEY_CHECKS = 1;
 
 -- -----------------------------------------------------
 -- Schema mydb
@@ -83,7 +83,7 @@ ENGINE = InnoDB;
 -- Table tb_pagamento
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS tb_pagamento (
-  id_pagamento INT NOT NULL AUTO_INCREMENT,
+  id_pagamento INT NOT NULL,
   tipo_pagamento ENUM('credito', 'debito', 'pix') NOT NULL,
   valor_total_pago DECIMAL(12,2) NOT NULL,
   data_hr_pagamento DATETIME NOT NULL,
@@ -100,7 +100,7 @@ ENGINE = InnoDB;
 -- Table tb_pedido
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS tb_pedido (
-  id_pedido INT NOT NULL AUTO_INCREMENT,
+  id_pedido INT NOT NULL,
   data_hr_pedido DATETIME NOT NULL,
   data_hr_retirada DATETIME NULL,
   data_hr_disp_retirada DATETIME NOT NULL,
@@ -131,7 +131,7 @@ CREATE TABLE IF NOT EXISTS tb_produto(
   
     FOREIGN KEY (id_cnpj)
     REFERENCES tb_parceiro (id_cnpj)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
