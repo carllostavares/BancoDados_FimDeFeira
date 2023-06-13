@@ -10,7 +10,7 @@ select * from tb_parceiro;
 select * from tb_produto;
 select * from tb_telefone;
 select * from tb_pagamento;
-SELECT * from  tb_itens_pedido;
+SELECT * from  tb_itens_pedido order by id_pedido ;
 select * from tb_endereco;
 
     

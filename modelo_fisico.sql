@@ -87,30 +87,29 @@ CREATE TABLE IF NOT EXISTS tb_pagamento (
   tipo_pagamento ENUM('credito', 'debito', 'pix') NOT NULL,
   valor_total_pago DECIMAL(12,2) NOT NULL,
   data_hr_pagamento DATETIME NOT NULL,
-  PRIMARY KEY (id_pagamento))
+  id_pedido INT NOT NULL,
+  PRIMARY KEY (id_pagamento),
+  
+	FOREIGN KEY (id_pedido)
+    REFERENCES tb_pedido (id_pedido)
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table tb_pedido
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS tb_pedido (
-  id_pedido INT NOT NULL,
+  id_pedido INT NOT NULL AUTO_INCREMENT,
   data_hr_pedido DATETIME NOT NULL,
   data_hr_retirada DATETIME NULL,
   data_hr_disp_retirada DATETIME NOT NULL,
-  id_pagamento INT NOT NULL,
   id_cpf_cliente VARCHAR(14) NOT NULL,
   valor_total_pedido DECIMAL(12,2),
   PRIMARY KEY (id_pedido),
   CONSTRAINT fk_tb_pedido
   
-    FOREIGN KEY (id_pagamento)
-    REFERENCES tb_pagamento (id_pagamento)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-    
-  CONSTRAINT fk_tb_cliente1
-    FOREIGN KEY (id_cpf_cliente)
+	FOREIGN KEY (id_cpf_cliente)
     REFERENCES tb_cliente (id_cpf_cliente)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)

@@ -49,7 +49,7 @@ DROP TABLE IF EXISTS tb_parceiro;
 -- CREATE TRIGGER
 
 DELIMITER $$
-CREATE DEFINER=`root`@`localhost` TRIGGER `trg_atualizando_qtd_produto` AFTER INSERT ON `tb_itens_pedido` FOR EACH ROW BEGIN
+CREATE TRIGGER `trg_atualizando_qtd_produto` AFTER INSERT ON `tb_itens_pedido` FOR EACH ROW BEGIN
 
 DECLARE valor_inserido INT;
   SET valor_inserido = NEW.qtd_itens;
@@ -70,7 +70,6 @@ DECLARE valor_inserido INT;
 END$$
 DELIMITER ;
 
-
 DELIMITER //
 CREATE TRIGGER trg_atualiza_valor_total_pedido
 AFTER INSERT ON tb_itens_pedido
@@ -85,7 +84,8 @@ BEGIN
     WHERE ip.id_pedido = NEW.id_pedido;
   
   UPDATE tb_pedido
-    SET valor_total_pedido = total
-    WHERE id_pedido = (SELECT id_pedido FROM tb_itens_pedido WHERE id_pedido = NEW.id_pedido);
+    SET valor_total_pedido = valor_total_pedido + total
+    WHERE id_pedido = NEW.id_pedido;
 END //
 DELIMITER ;
+
