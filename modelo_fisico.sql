@@ -85,7 +85,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS tb_pagamento (
   id_pagamento INT NOT NULL AUTO_INCREMENT,
   tipo_pagamento ENUM('credito', 'debito', 'pix') NOT NULL,
-  valor_total_pedido DECIMAL(12,2) NOT NULL,
+  valor_total_pago DECIMAL(12,2) NOT NULL,
   data_hr_pagamento DATETIME NOT NULL,
   PRIMARY KEY (id_pagamento))
 ENGINE = InnoDB;
@@ -143,7 +143,6 @@ CREATE TABLE IF NOT EXISTS tb_itens_pedido (
   id_produto INT NOT NULL,
   id_pedido INT NOT NULL,
   qtd_itens INT NOT NULL,
-  valor_total_itens DECIMAL(12,2) NOT NULL,
   PRIMARY KEY (id_produto, id_pedido),
   CONSTRAINT fk_id_produto_id_produto
   

@@ -1,20 +1,25 @@
 
 
-INSERT INTO tb_itens_pedido values (1,1,100,20.00);
-INSERT INTO tb_itens_pedido values (2,2,200,20.00);
+INSERT INTO tb_itens_pedido values (1,1,100);
+INSERT INTO tb_itens_pedido values (2,2,200);
+insert into tb_pagamento values (1,"pix",0,'2023-06-12');
 
 SELECT * FROM tb_pedido;
 select * from tb_cliente;
 select * from tb_parceiro;
 select * from tb_produto;
 select * from tb_telefone;
+select * from tb_pagamento;
 SELECT * from  tb_itens_pedido;
 
     
 DELETE from  tb_itens_pedido where id_pedido = 1;
+DELETE from  tb_itens_pedido;
+delete from tb_pagamento;
 delete  from tb_telefone;
 delete  from tb_produto;
 delete  from tb_cliente;
+delete  from tb_pedido;
 delete  from tb_cliente where nome = "Joao Carlos" ;
  -- now()
 
@@ -34,6 +39,19 @@ call inserir_cliente("000.456.789-56", "Carlos", "Gomes","tavares@gmail.com",'M'
 UPDATE tb_itens_pedido
 JOIN tb_produto ON tb_itens_pedido.id_produto = tb_produto.id_produto
 SET valor_total_itens = tb_itens_pedido.qtd_itens * tb_produto.valor_produto;
+
+
+DELIMITER $$
+DECLARE valor_inserido DECIMAL;
+UPDATE tb_pagamento
+JOIN tb_pagamento ON tb_pagamento.id_pagamento = tb_pedido.id_pedido
+	JOIN tb_pedido ON tb_pedido.id_pedido = tb_itens_pedido.id_pedido
+		SET valor_total_pedido = valor_total_pedido + valor_inserido
+			JOIN tb_produto ON tb_itens_pedido.id_produto = tb_produto.id_produto
+				SET valor_inserido = tb_itens_pedido.qtd_itens * tb_produto.valor_produto
+
+END
+DELIMITER;
 
 
 SELECT 

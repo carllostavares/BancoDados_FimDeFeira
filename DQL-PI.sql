@@ -49,15 +49,13 @@ DROP TABLE IF EXISTS tb_parceiro;
 -- CREATE TRIGGER
 
 DELIMITER $$
-CREATE DEFINER = CURRENT_USER TRIGGER `trg_retonando_qtd_produto` BEFORE DELETE ON `tb_itens_pedido` FOR EACH ROW
-BEGIN
+CREATE DEFINER=`root`@`localhost` TRIGGER `trg_atualizando_qtd_produto` AFTER INSERT ON `tb_itens_pedido` FOR EACH ROW BEGIN
 
 DECLARE valor_inserido INT;
-  
-  SET valor_inserido = OLD.qtd_itens;
-  
-  UPDATE tb_produto
-  SET qtd_total = qtd_total + valor_inserido;
+  SET valor_inserido = NEW.qtd_itens;
+	UPDATE tb_produto
+		  SET qtd_total = qtd_total - valor_inserido
+			WHERE tb_produto.id_produto = NEW.id_produto;
 END$$
 DELIMITER ;
 
@@ -65,10 +63,29 @@ DELIMITER $$
 CREATE DEFINER=`root`@`localhost` TRIGGER `trg_retonando_qtd_produto` BEFORE DELETE ON `tb_itens_pedido` FOR EACH ROW BEGIN
 
 DECLARE valor_inserido INT;
-  
   SET valor_inserido = OLD.qtd_itens;
-  
-  UPDATE tb_produto
-  SET qtd_total = qtd_total + valor_inserido;
+	UPDATE tb_produto
+		SET qtd_total = qtd_total + valor_inserido
+			WHERE tb_produto.id_produto = OLD.id_produto;
 END$$
+DELIMITER ;
+
+
+DELIMITER //
+CREATE TRIGGER trg_atualiza_valor_total_pedido
+AFTER INSERT ON tb_itens_pedido
+FOR EACH ROW
+BEGIN
+  DECLARE total DECIMAL(12,2);
+  
+  SELECT SUM(ip.qtd_itens * p.valor_produto)
+    INTO total
+    FROM tb_itens_pedido ip
+    JOIN tb_produto p ON p.id_produto = ip.id_produto
+    WHERE ip.id_pedido = NEW.id_pedido;
+  
+  UPDATE tb_pedido
+    SET valor_total_pedido = total
+    WHERE id_pedido = (SELECT id_pedido FROM tb_itens_pedido WHERE id_pedido = NEW.id_pedido);
+END //
 DELIMITER ;
