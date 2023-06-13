@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS tb_endereco (
   numero INT NOT NULL,
   bairro VARCHAR(200) NOT NULL,
   uf VARCHAR(2) NOT NULL,
-  cep VARCHAR(8) NOT NULL,
+  cep VARCHAR(9) NOT NULL,
   cidade VARCHAR(100) NOT NULL,
   id_cpf_cliente VARCHAR(14) NULL,
   id_cnpj VARCHAR(20) NULL,
