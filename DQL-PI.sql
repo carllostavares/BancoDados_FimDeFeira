@@ -46,8 +46,10 @@ DROP TABLE IF EXISTS tb_parceiro;
 -- DROP FUNCTION IF EXISTS function_name;
 
 
--- CREATE TRIGGER
 
+-- -----------------------------------------------------
+-- CREATE TRIGGER
+-- -----------------------------------------------------
 DELIMITER $$
 CREATE TRIGGER `trg_atualizando_qtd_produto` AFTER INSERT ON `tb_itens_pedido` FOR EACH ROW BEGIN
 
@@ -135,4 +137,30 @@ END //
 
 DELIMITER ;
 
+-- -----------------------------------------------------
+-- PROCEDURE
+-- -----------------------------------------------------
+
+delimiter //
+create procedure inserir_cliente(in id_cpf_cliente varchar(14), in nome varchar(100), in sobrenome varchar(100), in email varchar(100),
+in sexo enum('M','F','Nao informar'), in data_nasc date,in senha varchar(45), in id_numero int, in numero varchar(11))
+	begin
+		insert into tb_cliente value (id_cpf_cliente, nome, sobrenome, email, sexo, data_nasc,senha);
+		insert into tb_telefone value(id_numero,numero,id_cpf_cliente,id_cnpj);
+    end //
+delimiter ;
+
+call inserir_cliente("123.456.789-56", "Pedro", "Sebastião","pedroseb@gmail.com",'M','1984-07-09',"23232323", 1 ,"81988293122");
+call inserir_cliente("000.456.789-56", "Carlos", "Gomes","tavares@gmail.com",'M','1996-07-09',"19191919", 2 ,"84988293122");
+-- -----------------------------------------------------
+
+DELIMITER //
+CREATE PROCEDURE inserir_parceiro(IN id_cnpj varchar(20), IN nome varchar(60), IN email varchar(200),IN id_numero INT, IN numero VARCHAR(11))
+	BEGIN
+		INSERT  INTO tb_parceiro VALUES (id_cnpj,nome,email);
+        INSERT INTO tb_telefone VALUES (id_numero,numero,id_cpf_cliente,id_cnpj);
+	END //
+DELIMITER ;
+
+call inserir_parceiro("97.776.3530001","Mercado do Galego","compreAqui@gmail.com",1,"81988175025");
 

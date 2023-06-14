@@ -1,7 +1,7 @@
 
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=1;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET  FOREIGN_KEY_CHECKS = 1;
+SET  FOREIGN_KEY_CHECKS = 0;
 
 -- -----------------------------------------------------
 -- Schema mydb
@@ -103,7 +103,7 @@ CREATE TABLE IF NOT EXISTS tb_pedido (
   id_pedido INT NOT NULL,
   data_hr_pedido DATETIME NOT NULL,
   data_hr_retirada DATETIME NULL,
-  data_hr_disp_retirada DATETIME NOT NULL,
+  data_hr_disp_retirada DATETIME  NULL,
   id_cpf_cliente VARCHAR(14) NOT NULL,
   valor_total_pedido DECIMAL(12,2),
   PRIMARY KEY (id_pedido),
