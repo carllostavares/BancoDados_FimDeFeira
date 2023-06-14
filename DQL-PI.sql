@@ -1,5 +1,7 @@
+ -- -----------------------------------------------------
 -- Scripts : Alterar as Estruturas das Tabelas (DDL)
- 
+-- -----------------------------------------------------
+
 ALTER TABLE tb_endereco ADD COLUMN referencia VARCHAR(100); 
 
 ALTER TABLE tb_cliente
@@ -13,8 +15,42 @@ MODIFY COLUMN qtd_max_venda INT NOT NULL;
 
 ALTER TABLE tb_parceiro ADD COLUMN pontuacao INT; 
 
+-- -----------------------------------------------------
+-- script para alterar os dados da tabela 
+-- -----------------------------------------------------
 
+UPDATE tb_cliente
+	SET email = 'cacaboto@example.com'
+		WHERE id_cpf_cliente = '11122233332';
+        
+UPDATE tb_parceiro
+	SET nome = 'Juca Alimentos'
+		WHERE id_cnpj = '97.776.3530001';
+
+UPDATE tb_telefone
+	SET numero = '81987354321'
+		WHERE id_cpf_cliente = '11122233332';
+
+UPDATE tb_endereco
+	SET logradouro = 'Rua do Centro Boto', numero = 908, bairro = 'Carririo'
+		WHERE id_cnpj = '97.776.3530001';
+        
+UPDATE tb_pagamento
+	SET tipo_pagamento = 'debito'
+		WHERE id_pagamento = 1;
+
+-- -----------------------------------------------------
+-- script para deletar os dados da tabela 
+-- -----------------------------------------------------
+DELETE FROM tb_telefone WHERE id_cpf_cliente IS NULL;
+DELETE FROM tb_endereco WHERE id_cpf_cliente IS NULL AND id_cnpj IS NULL;
+DELETE FROM tb_telefone WHERE numero = '82212633406';
+DELETE FROM tb_cliente WHERE id_cpf_cliente = '11122233332';
+DELETE FROM tb_endereco WHERE logradouro = 'Rua A' AND numero = 123;
+
+-- -----------------------------------------------------
 -- script para destruir (DDL) todas as tabelas, views, procedimentos, funções e dependências do seu banco de dados;
+-- -----------------------------------------------------
  
  -- Drop foreign key constraints
 ALTER TABLE tb_telefone DROP FOREIGN KEY fk_tb_telefone;
@@ -27,7 +63,10 @@ ALTER TABLE tb_produto DROP FOREIGN KEY fk_tb_produto;
 ALTER TABLE tb_itens_pedido DROP FOREIGN KEY fk_id_produto_id_produto;
 ALTER TABLE tb_itens_pedido DROP FOREIGN KEY fk_id_produto_id_produto_2;
 
+-- -----------------------------------------------------
 -- Drop tables
+-- -----------------------------------------------------
+
 DROP TABLE IF EXISTS tb_itens_pedido;
 DROP TABLE IF EXISTS tb_pedido;
 DROP TABLE IF EXISTS tb_pagamento;
@@ -37,13 +76,27 @@ DROP TABLE IF EXISTS tb_telefone;
 DROP TABLE IF EXISTS tb_cliente;
 DROP TABLE IF EXISTS tb_parceiro;
 
+
+-- -----------------------------------------------------
 -- Drop views, procedures, functions (if applicable):
+-- -----------------------------------------------------
 
+
+-- -----------------------------------------------------
 -- DROP VIEW IF EXISTS view_name;
+-- -----------------------------------------------------
 
+
+
+-- -----------------------------------------------------
 -- DROP PROCEDURE IF EXISTS procedure_name;
+-- -----------------------------------------------------  
 
+
+
+-- -----------------------------------------------------
 -- DROP FUNCTION IF EXISTS function_name;
+-- -----------------------------------------------------
 
 
 
