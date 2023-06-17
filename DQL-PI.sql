@@ -40,6 +40,7 @@ UPDATE tb_pagamento
 		WHERE id_pagamento = 1;
 
 -- -----------------------------------------------------
+-- -----------------------------------------------------
 -- script para deletar os dados da tabela 
 -- -----------------------------------------------------
 DELETE FROM tb_telefone WHERE id_cpf_cliente IS NULL;
