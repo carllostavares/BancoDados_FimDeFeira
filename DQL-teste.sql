@@ -54,3 +54,99 @@ DECLARE valor_inserido INT;
 END$$
 DELIMITER ;
 
+-- -------------------------------------------------------------------------------------------------------------------------------------------------
+-- O o iten que teva a maior quantidade vendida em um único pedido
+SELECT ip.id_pedido , p.descricao_produto 'Descricao Produto', p.valor_produto 'Valor produto', c.nome "Cliete", pa.nome "Parceiro", ip.qtd_itens "Quantidade Produto"
+FROM tb_itens_pedido ip
+JOIN tb_pedido pe ON pe.id_pedido = ip.id_pedido
+JOIN tb_produto p ON p.id_produto = ip.id_produto
+JOIN tb_cliente c ON c.id_cpf_cliente = pe.id_cpf_cliente
+JOIN tb_parceiro pa ON pa.id_cnpj = p.id_cnpj
+GROUP BY ip.id_pedido, p.descricao_produto, p.valor_produto, c.nome, pa.nome, ip.qtd_itens
+ORDER BY sum(ip.qtd_itens) DESC limit 1;
+
+-- -------------------------------------------------------------------------------------------------------------------------------------------------
+ -- Motre os 5 pedidos com maior valor
+SELECT pe.id_pedido, c.nome AS nome_cliente, pe.valor_total_pedido, pg.tipo_pagamento
+FROM tb_pedido pe
+JOIN tb_cliente c ON c.id_cpf_cliente = pe.id_cpf_cliente
+JOIN tb_pagamento pg ON pg.id_pedido = pe.id_pedido
+order by valor_total_pedido desc
+LIMIT 5;
+
+-- -------------------------------------------------------------------------------------------------------------------------------------------------
+-- Mostre o pedido com maior valor
+SELECT pe.id_pedido, c.nome AS nome_cliente, pe.valor_total_pedido, pg.tipo_pagamento
+FROM tb_pedido pe
+JOIN tb_cliente c ON c.id_cpf_cliente = pe.id_cpf_cliente
+JOIN tb_pagamento pg ON pg.id_pedido = pe.id_pedido
+WHERE pe.valor_total_pedido = (
+    SELECT MAX(valor_total_pedido)
+    FROM tb_pedido
+)
+LIMIT 1;
+
+-- -------------------------------------------------------------------------------------------------------------------------------------------------
+-- Produto com maior data de validade
+SELECT p.id_produto, p.descricao_produto, p.valor_produto, p.data_validade, pa.nome AS nome_parceiro
+FROM tb_produto p
+JOIN tb_parceiro pa ON pa.id_cnpj = p.id_cnpj
+WHERE p.data_validade = (
+    SELECT MAX(data_validade)
+    FROM tb_produto
+)
+LIMIT 1;
+
+-- -------------------------------------------------------------------------------------------------------------------------------------------------
+-- Produto com menor data de validade
+SELECT p.id_produto, p.descricao_produto, p.valor_produto, p.data_validade, pa.nome AS nome_parceiro
+FROM tb_produto p
+JOIN tb_parceiro pa ON pa.id_cnpj = p.id_cnpj
+WHERE p.data_validade = (
+    SELECT min(data_validade)
+    FROM tb_produto
+)
+LIMIT 1;
+-- -------------------------------------------------------------------------------------------------------------------------------------------------
+-- Mostre CPF, nome completo, telefone e endereço dos clientes
+SELECT c.id_cpf_cliente "CPF", CONCAT( c.nome, ' ', c.sobrenome) AS 'Nome Completo', t.numero "Número Telefone", e.logradouro "Logradouro",e.numero "Número",e.bairro "Bairro", e.cidade "Cidade" , e.cep "CEP", e.uf "UF"
+FROM tb_cliente c
+JOIN tb_telefone t ON t.id_cpf_cliente = c.id_cpf_cliente
+JOIN tb_endereco e ON e.id_cpf_cliente = c.id_cpf_cliente;
+
+-- -------------------------------------------------------------------------------------------------------------------------------------------------
+-- Produto com a maior quantidade em estoque e nome do estabelecimento
+SELECT p.id_produto, p.qtd_total, p.descricao_produto, p.valor_produto, p.data_validade, pa.nome AS nome_parceiro, p.id_cnpj
+FROM tb_produto p
+JOIN tb_parceiro pa ON pa.id_cnpj = p.id_cnpj
+WHERE p.qtd_total = (SELECT MAX(qtd_total) FROM tb_produto);
+
+-- -------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- Mostre todo os produtos que foram vendidos com a daataa de validade entre '2023-08-01' e '2023-09-01'.
+SELECT ip.id_produto "ID Produto", p.data_validade "Data de Validade", pe.data_hr_pedido "Data do Pedido", p.descricao_produto "descricao do Produto", p.valor_produto "Valor Produto",
+CONCAT( c.nome, ' ', c.sobrenome) AS 'Nome Completo', pa.nome AS "Nome Estabelecimento"
+FROM tb_itens_pedido ip
+JOIN tb_produto p ON p.id_produto = ip.id_produto
+JOIN tb_pedido pe ON pe.id_pedido = ip.id_pedido
+JOIN tb_cliente c ON c.id_cpf_cliente = pe.id_cpf_cliente
+JOIN tb_parceiro pa ON pa.id_cnpj = p.id_cnpj
+WHERE p.data_validade BETWEEN '2023-08-01' AND '2023-09-01';
+-- -------------------------------------------------------------------------------------------------------------------------------------------------
+-- O dias que mais teve o pedido com mair numero de produtos
+SELECT sub.data_hr_pedido "Data do Pedido", ip.id_pedido "ID Pedido", p.data_validade "Data da Validade", sub.data_hr_pedido  "Data do Pedido",
+ p.descricao_produto "Descricao do Produto", p.valor_produto "Valor Produto",CONCAT( c.nome, ' ', c.sobrenome) , pa.nome "Nome do Estabelecimento"
+FROM tb_itens_pedido ip
+JOIN tb_produto p ON p.id_produto = ip.id_produto
+JOIN tb_pedido pe ON pe.id_pedido = ip.id_pedido
+JOIN tb_cliente c ON c.id_cpf_cliente = pe.id_cpf_cliente
+JOIN tb_parceiro pa ON pa.id_cnpj = p.id_cnpj
+JOIN (
+  SELECT pe.data_hr_pedido
+  FROM tb_itens_pedido ip
+  JOIN tb_pedido pe ON pe.id_pedido = ip.id_pedido
+  GROUP BY pe.data_hr_pedido
+  ORDER BY COUNT(ip.id_pedido) DESC
+  LIMIT 2
+) sub ON sub.data_hr_pedido = pe.data_hr_pedido;
+

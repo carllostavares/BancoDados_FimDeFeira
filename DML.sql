@@ -125,7 +125,7 @@ VALUES
 -- -----------------------------------------------------
 
 INSERT INTO tb_produto (id_produto, valor_produto, descricao_produto, qtd_max_venda, qtd_total, id_cnpj, data_validade)
-VALUES (1, 5.0, "Feijão Turquesa 1kg", 20, 400, "97.776.3530001", '2023-05-31'),(11, 3.50, "Biscoito Bono 150g", 20, 10, "97.776.3530001", '2023-07-15'),
+VALUES (1, 5.0, "Feijão Turquesa 1kg", 20, 400, "97.776.3530001", '2023-05-31'),(11, 3.50, "Biscoito Bono 150g", 20, 10, "97.776.3530001", '   '),
 (12, 4.0, "Macarrão Fitarela 1kg", 20, 5, "97.776.3530001", '2023-07-09'),(13, 3.80, "Açuca Cristal 1kg", 20, 15, "97.776.3530001", '2023-07-20'),
 (14, 2.0, "Arroz Emoções 1kg", 20, 30, "97.776.3530001", '2023-07-08'),(15, 3.20, "Leite Itambé 120g", 20, 50, "97.776.3530001", '2023-07-10');
 
@@ -161,8 +161,8 @@ VALUES (7, 3.0, "Creme de Leite Nestle 200ml", 30, 600, "55.667.7780001", '2023-
 
 INSERT INTO tb_produto (id_produto, valor_produto, descricao_produto, qtd_max_venda, qtd_total, id_cnpj, data_validade)
 VALUES (8, 6.5, "refrigerante fanta uva 2L", 20, 40, "66.778.8890001", '2023-06-25'),(46, 1.99, "Bolacha de Água e Sal 200g", 20, 150, "66.778.8890001", '2023-09-10'),
-(47, 2.50, "Refrigerante de Guaraná 500ml", 20, 100, "66.778.8890001", '2023-09-15'),(48, 1.50, "Sabonete Líquido 250ml", 20, 200, "66.778.8890001", '2023-09-20'),
-(49, 4.99, "Café Solúvel 200g", 20, 120, "66.778.8890001", '2023-09-25'),(50, 3.20, "Leite Condensado 395g", 20, 180, "66.778.8890001", '2023-09-30');
+(47, 2.50, "Refrigerante de Guaraná 500ml", 20, 100, "66.778.8890001", '2023-09-15'),(48, 1.50, "Sabonete Líquido 250ml", 20, 200, "66.778.8890001", '2023-07-10'),
+(49, 4.99, "Café Solúvel 200g", 20, 120, "66.778.8890001", '2023-08-25'),(50, 3.20, "Leite Condensado 395g", 20, 180, "66.778.8890001", '2023-09-30');
 
 INSERT INTO tb_produto (id_produto, valor_produto, descricao_produto, qtd_max_venda, qtd_total, id_cnpj, data_validade)
 VALUES (9, 4.99, "Sabonete Dove 90g ", null, 30, "77.889.9000001", '2023-06-30'),(51, 1.99, "Biscoito Cream Cracker 200g", null, 150, "11.223.3340001", '2023-09-10'),
