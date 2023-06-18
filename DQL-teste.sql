@@ -215,7 +215,7 @@ GROUP BY ip.id_pedido, p.descricao_produto, p.valor_produto, c.nome, pa.nome, ip
 ORDER BY sum(ip.qtd_itens) DESC limit 1;
 
 -- -------------------------------------------------------------------------------------------------------------------------------------------------
- -- Motre os 5 pedidos com maior valor
+ -- Mostre os 5 pedidos com maior valor
 SELECT pe.id_pedido, c.nome AS nome_cliente, pe.valor_total_pedido, pg.tipo_pagamento
 FROM tb_pedido pe
 JOIN tb_cliente c ON c.id_cpf_cliente = pe.id_cpf_cliente
