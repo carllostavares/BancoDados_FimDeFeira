@@ -334,4 +334,74 @@ FROM tb_pedido pe
 JOIN tb_pagamento pg ON pe.id_pedido = pg.id_pedido
 GROUP BY pg.tipo_pagamento;
 
+-- -------------------------------------------------------------------------------------------------------------------------------------------------
+-- Quais são os produtos que estão em falta no estoque em um determinado parceiro (88.990.0110001)? - JOIN
+
+SELECT prod.id_produto, prod.descricao_produto, prod.qtd_total, par.id_cnpj
+FROM tb_produto as prod
+INNER JOIN tb_parceiro as par ON par.id_cnpj = prod.id_cnpj
+WHERE par.id_cnpj = '88.990.0110001' AND qtd_total = 0;
+
+-- -------------------------------------------------------------------------------------------------------------------------------------------------
+-- Quais são os 5 produtos mais comprados pelo clientes? - JOIN 
+
+SELECT c.id_cpf_cliente, c.nome, itens.qtd_itens, prod.descricao_produto
+FROM tb_cliente as c
+JOIN tb_pedido as ped ON ped.id_cpf_cliente = c.id_cpf_cliente
+JOIN tb_itens_pedido as itens ON itens.id_pedido = ped.id_pedido
+JOIN tb_produto as prod ON prod.id_produto = itens.id_produto
+ORDER BY itens.qtd_itens desc
+LIMIT 5;
+
+-- -------------------------------------------------------------------------------------------------------------------------------------------------
+-- Onde está localizado a maioria dos clientes - JOIN 
+
+SELECT c.nome, c.sobrenome, ende.cidade, ende.uf
+FROM tb_cliente as c
+JOIN tb_endereco as ende ON ende.id_cpf_cliente = c.id_cpf_cliente
+ORDER BY ende.uf;
+
+-- -------------------------------------------------------------------------------------------------------------------------------------------------
+-- Quais são os produtos comprados por clientes que estão no mesmo estado? - JOIN
+
+SELECT  c.nome, c.sobrenome, ende.uf, prod.descricao_produto, itens.qtd_itens
+	FROM tb_cliente as c
+        JOIN tb_endereco as ende ON ende.id_cpf_cliente = c.id_cpf_cliente
+        JOIN tb_pedido as ped ON ped.id_cpf_cliente = c.id_cpf_cliente
+        JOIN tb_itens_pedido as itens ON itens.id_pedido = ped.id_pedido
+        JOIN tb_produto as prod ON prod.id_produto = itens.id_produto
+        WHERE ende.uf = 'BA'
+        ORDER BY itens.qtd_itens desc;
+        
+        
+-- -------------------------------------------------------------------------------------------------------------------------------------------------
+--  Quais os clientes que tem no inicio o DDD 84?
+
+SELECT  tb_cliente.nome AS Cliente, tb_telefone.numero AS Telefone, tb_endereco.cidade
+	FROM tb_cliente
+		JOIN tb_telefone ON tb_telefone.id_cpf_cliente = tb_cliente.id_cpf_cliente
+        JOIN tb_endereco ON tb_endereco.id_cpf_cliente = tb_cliente.id_cpf_cliente
+			WHERE tb_telefone.numero LIKE "84%";
+            
+-- -------------------------------------------------------------------------------------------------------------------------------------------------
+--  Quais os pedidos que foram feitos entre os meses 05 e 06 de 2023?
+	SELECT date(tb_pedido.data_hr_pedido) AS Pedido, tb_pagamento.tipo_pagamento AS 'Tipo Pagamento'
+	FROM tb_pedido
+		LEFT JOIN tb_pagamento ON tb_pagamento.id_pagamento = tb_pedido.id_pedido
+			WHERE month(data_hr_pedido) in(5, 6);
+            
+-- -------------------------------------------------------------------------------------------------------------------------------------------------
+--  Quais os parceiros que estão com o estoque abaixo de 50 unidades?
+	SELECT tb_produto.id_produto as Produto, tb_produto.qtd_total AS "Quantidade em Estoque", tb_parceiro.nome AS Parceiro, tb_telefone.id_cnpj AS Contato
+	FROM tb_parceiro
+		JOIN tb_produto ON tb_produto.id_cnpj = tb_parceiro.id_cnpj
+		JOIN tb_telefone on tb_telefone.id_cnpj = tb_parceiro.id_cnpj
+			WHERE qtd_total < 50;
+	
+
+-- -------------------------------------------------------------------------------------------------------------------------------------------------
+--  Qual a quantidade vendida de cada produto?
+	SELECT tb_produto.id_produto AS 'ID Produto', tb_produto.descricao_produto AS Nome, tb_itens_pedido.qtd_itens AS 'Quantidade vendida'
+		FROM  tb_itens_pedido
+		RIGHT JOIN tb_produto ON tb_produto.id_produto = tb_itens_pedido.id_produto;
 

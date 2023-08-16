@@ -173,8 +173,10 @@ VALUES (9, 4.99, "Sabonete Dove 90g ", null, 30, "77.889.9000001", '2023-06-30')
 INSERT INTO tb_produto (id_produto, valor_produto, descricao_produto, qtd_max_venda, qtd_total, id_cnpj, data_validade)
 VALUES (10, 7.0, "Shampoo Dex 300ml", null, 150, "88.990.0110001", '2023-06-28'),(56, 7.0, "Shampoo Dex 300ml", null, 150, "88.990.0110001", '2023-06-28'),
     (57, 12.5, "Condicionador Suave 200ml", null, 80, "88.990.0110001", '2023-07-15'),(58, 2.99, "Sabonete em Barra 90g", null, 200, "88.990.011000", '2023-08-10'),
-    (59, 3.75, "Creme Dental Fresh 50g", null, 250, "88.990.0110001", '2023-09-05'),(60, 5.25, "Desodorante Roll-on 50ml", null, 180, "88.990.0110001", '2023-10-20');
+    (59, 3.75, "Creme Dental Fresh 50g", null, 250, "88.990.0110001", '2023-09-05'),(60, 5.25, "Desodorante Roll-on 50ml", null, 180, "88.990.0110001", '2023-10-20'),
+    (61, 8.25, "Leite DVaca", null, 0, "88.990.0110001", '2023-10-10');
 
+delete from tb_produto;
 -- -----------------------------------------------------
 -- Table tb_itens_pedido
 -- -----------------------------------------------------

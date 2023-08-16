@@ -1,8 +1,10 @@
 
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=1;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET GLOBAL log_bin_trust_function_creators = 1;
+
 SET  FOREIGN_KEY_CHECKS = 0;
-SET  FOREIGN_KEY_CHECKS = 1;
+SET  FOREIGN_KEY_CHECKS = 0;
 
 -- -----------------------------------------------------
 -- Schema mydb
