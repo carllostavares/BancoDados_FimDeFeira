@@ -34,13 +34,17 @@ Um Banco de Dados de um site web, com Modelo Conceitual, Loógico e Físico. Nes
 ## Tecnologia utilizada:
 
 <div style="display: inline_block">
- <img align="center" alt="madeira-mysql" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original.svg">
+ <img align="center" alt="madeira-mysql" height="60" width="60" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original.svg">
  <img src="./img/brmodelo.png" width = "50px"  height = "50px">
 </div>
 
 <br><p>
 O projeto foi desenvolvido inicialmente com o br_Modelo e MySQL Workbench. Logo mais será inicido a codificão e implementação com o back-end da aplica.ção.
 </p>
+
+<p><br>
+O projeto possui arquivos com DML códigos DQl para testes do funcionamento das Stored procedure, funções e Casdade do banco de dados.
+<br><p>
 
 
 
